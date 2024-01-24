@@ -2,7 +2,8 @@ const { Router } = require("express");
 const User = require("../db");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
-const { JWT_SECRET } = require("../config");
+const JWT_SECRET = require("../config");
+const authMiddleware = require("../middleware");
 
 const signupSchema = zod.object({
     username: zod.string(),
@@ -16,18 +17,23 @@ const signinSchema = zod.object({
     password: zod.string()
 });
 
+const updateSchema = zod.object({
+    password: zod.string().optional(),
+    firstName: zod.string().optional(),
+    lastName: zod.string().optional(),
+})
+
 const userRouter = Router();
 
-userRouter.post("/signup", async (req, res) => {
+userRouter.post("/signup" ,async (req, res) => {
     const body = req.body;
     
     const { success } = signupSchema.safeParse(body);
     const dbCheck = await User.findOne({ username: body.username });
     
     if (success && !dbCheck) {
-        await User.create(body);
-        const token = jwt.sign({ userId: body._id }, JWT_SECRET);
-        // Corrected: Use res.json instead of json.res
+        const user = await User.create(body);
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET);
         res.json({ message: "User created successfully", token: token });
     } else {
         res.status(411).json({ message: "Email already taken / Incorrect inputs" });
@@ -44,7 +50,6 @@ userRouter.post("/signin", async (req, res) => {
     }
 
     const check = await User.findOne({ username, password });
-    
     if (check) {
         const token = jwt.sign({ userId: check._id }, JWT_SECRET);
         res.json({ token: token });
@@ -52,5 +57,40 @@ userRouter.post("/signin", async (req, res) => {
         res.status(411).json({ msg: "User not found" });
     }
 });
+
+userRouter.put("/", authMiddleware, async (req, res) => {
+    const { success, data } = updateSchema.safeParse(req.body);
+
+    if (!success) {
+        res.status(400).json({ msg: "Invalid credentials" });
+        return;
+    }
+
+    const filter = { _id: req.userId }; 
+    const update = { $set: data };
+
+    try {
+        const result = await User.updateOne(filter, update);
+        if (result.modifiedCount > 0) {
+            res.json({ msg: 'Document updated successfully!' });
+        } else {
+            res.json({ msg: 'Document not found or no modifications were made.' });
+        }
+    } catch (error) {
+        console.error('Error updating document:', error);
+        res.status(500).json({ msg: 'Internal Server Error' });
+    }
+});
+
+userRouter.get("/", authMiddleware, async(req, res) => {
+    const filter = req.query.filter;
+    const users = await User.find({
+        $or: [
+            {firstName: filter}, 
+            {lastName: filter}
+        ]
+    });
+    res.json(users); //dont show the pass brooooo
+})
 
 module.exports = userRouter;
