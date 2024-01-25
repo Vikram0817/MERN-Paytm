@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const User = require("../db");
+const {User} = require("../db");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
 const JWT_SECRET = require("../config");
@@ -90,7 +90,15 @@ userRouter.get("/", authMiddleware, async(req, res) => {
             {lastName: filter}
         ]
     });
-    res.json(users); //dont show the pass brooooo
+    const filterdUsers = users.map(user => {
+        return {
+            userId: user._id,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+        }
+    })
+    res.json(filterdUsers); 
 })
 
 module.exports = userRouter;
