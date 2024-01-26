@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const usernameState = atom({
   key: 'usernameState',
@@ -19,3 +19,8 @@ export const passwordState = atom({
   key: 'passwordState',
   default: '',
 });
+
+export const balanceState = atom({
+  key: "balance",
+  default: 0
+})
