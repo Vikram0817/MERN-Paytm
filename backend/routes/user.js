@@ -34,13 +34,13 @@ userRouter.post("/signup" ,async (req, res) => {
     if (success && !dbCheck) {
         const user = await User.create(body);
         
-        const balance = Math.floor(Math.random() * 10000);
+        const balance = Math.round((Math.random() * 10000) * 100) / 100;
         await Account.create({userId: user._id, balance: balance});
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET);
-        res.json({ message: "User created successfully", token: token });
+        res.json({ msg: "User created successfully", token: token });
     } else {
-        res.status(411).json({ message: "Email already taken / Incorrect inputs" });
+        res.status(411).json({ msg: "Email already taken / Incorrect inputs" });
     }
 });
 
@@ -56,7 +56,7 @@ userRouter.post("/signin", async (req, res) => {
     const check = await User.findOne({ username, password });
     if (check) {
         const token = jwt.sign({ userId: check._id }, JWT_SECRET);
-        res.json({ token: token });
+        res.json({ token: token , msg: "Logged in successfully"});
     } else {
         res.status(411).json({ msg: "User not found" });
     }
