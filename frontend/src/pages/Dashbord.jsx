@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
-import YourBalance from "./YouBalance";
-import FindUsers from "./FindUsers";
-import UserCard from "./UserCard";
-import SendMoneyModel from "./SendMoneyModel";
+import Navbar from "../components/Navbar";
+import YourBalance from "../components/YouBalance";
+import FindUsers from "../components/FindUsers";
 
 export default function Dashbord() {
 

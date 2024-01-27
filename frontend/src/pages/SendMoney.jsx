@@ -4,7 +4,7 @@ import { transferTo } from "../states";
 
 export default function SendMoneyModel(){
 
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(null);
     const transferToUser = useRecoilValue(transferTo);
 
     const token = localStorage.getItem("myToken");

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { firstNameState } from "../states";
-import { lastNameState } from "../states";
+import { firstNameState, lastNameState } from "../states";
 import {useRecoilState} from "recoil";
 
 export default function Navbar(){

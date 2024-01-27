@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { usernameState, firstNameState, lastNameState, passwordState } from "../states";
+import { usernameState, passwordState } from "../states";
 
 export default function Signin(){
     

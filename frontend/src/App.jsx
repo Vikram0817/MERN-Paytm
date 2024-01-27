@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./components/Signup";
-import Signin from "./components/signin";
-import Dashbord from "./components/Dashbord";
-import { RecoilRoot, useRecoilValue } from "recoil";
-import SendMoneyModel from "./components/SendMoneyModel";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import Dashbord from "./pages/Dashbord";
+import SendMoneyModel from "./pages/SendMoney";
 
 function App() {
   return (
