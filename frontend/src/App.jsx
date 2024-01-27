@@ -4,6 +4,7 @@ import Signup from "./components/Signup";
 import Signin from "./components/signin";
 import Dashbord from "./components/Dashbord";
 import { RecoilRoot, useRecoilValue } from "recoil";
+import SendMoneyModel from "./components/SendMoneyModel";
 
 function App() {
   return (
@@ -24,6 +25,11 @@ function App() {
             <Dashbord />
           }>
         </Route>
+        <Route path="/send_money"
+          element={
+            <SendMoneyModel />
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   )

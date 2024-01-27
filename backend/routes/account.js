@@ -44,7 +44,7 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
 
         await session.commitTransaction();
     
-        res.json({msg: "Transfer successful"});
+        res.json({msg: `Transaction for ₹${amount} done successfully`});
 
     }catch(err){
         await session.abortTransaction();
