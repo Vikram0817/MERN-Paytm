@@ -27,5 +27,8 @@ export const balanceState = atom({
 
 export const transferTo = atom({
   key: "to",
-  default: ""
+  default: {
+    username: "",
+    fullName: ""
+  }
 })

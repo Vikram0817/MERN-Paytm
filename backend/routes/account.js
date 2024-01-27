@@ -36,6 +36,10 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
     
         const toUserAccount = await Account.findOne({userId: toUser._id});
     
+        if(toUserAccount.userId == userId){
+            res.json({msg: "Can not transfer to yourself!"})
+            return;
+        }
         fromUserAccount.balance -= amount;
         await fromUserAccount.save();
 

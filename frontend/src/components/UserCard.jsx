@@ -1,17 +1,20 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { transferTo } from "../states";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 export default function UserCard({index, fullName, id, username}){
 
-    const [tranferToUser, setTransferToUser] = useRecoilState(transferTo);
+    const setTransferToUser = useSetRecoilState(transferTo);
 
     const navigate = useNavigate();
 
     function handleSend(){
+        setTransferToUser({
+            username: username, 
+            fullName: fullName
+        })
         navigate("/send_money")
-        setTransferToUser(username)
     }
 
     return(
