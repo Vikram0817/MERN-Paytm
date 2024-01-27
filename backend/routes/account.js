@@ -16,6 +16,11 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
     try{
         const userId = req.userId;
         const { to, amount } = req.body;
+
+        if(amount === 0){
+            res.json({msg: "You did not enter any amount"})
+            return;
+        }
         
         if(amount < 0){
             res.json({msg: "Transfer can't be negative."})
@@ -40,6 +45,7 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
             res.json({msg: "Can not transfer to yourself!"})
             return;
         }
+
         fromUserAccount.balance -= amount;
         await fromUserAccount.save();
 

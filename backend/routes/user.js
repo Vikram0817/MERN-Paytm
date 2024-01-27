@@ -87,12 +87,18 @@ userRouter.put("/", authMiddleware, async (req, res) => {
 });
 
 userRouter.get("/", authMiddleware, async(req, res) => {
-    const filter = req.query.filter;
+    const filter = req.query.filter || "";
     const users = await User.find({
-        $or: [
-            {firstName: filter}, 
-            {lastName: filter}
-        ]
+        $or: [{
+                firstName: {
+                    "$regex": filter
+                }
+            }, 
+            {
+                lastName: {
+                    "$regex": filter
+                }
+            }]
     });
     const filterdUsers = users.map(user => {
         return {

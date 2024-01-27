@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 
 export default function FindUsers(){
@@ -7,6 +7,10 @@ export default function FindUsers(){
     const [users, setUsers] = useState([]);
 
     const token = localStorage.getItem("myToken")
+
+    useEffect(() => {
+        handleSearch();
+    }, [])
 
     async function handleSearch() {
         const res = await fetch(`http://localhost:3000/api/v1/user/?filter=${filter}`, {
@@ -21,6 +25,11 @@ export default function FindUsers(){
             return;
         }
         const data = await res.json();
+        
+        if(data.length > 10){
+            data = data.slice(10);
+        }
+
         setUsers(data);
     }
 
