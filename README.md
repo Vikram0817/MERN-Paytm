@@ -41,5 +41,5 @@ Welcome to the Paytm App, a simple application for handling transactions and mon
 
 
 **TODOs**
-  - add a loader
   - store data in decimels in backend
+  - redirect on "/"

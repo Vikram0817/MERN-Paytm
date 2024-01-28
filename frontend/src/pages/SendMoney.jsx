@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function SendMoneyModel(){
 
-    const [amount, setAmount] = useState(null);
+    const [amount, setAmount] = useState("");
     const transferToUser = useRecoilValue(transferTo);
     const navigate = useNavigate();
 

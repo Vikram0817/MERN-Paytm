@@ -32,3 +32,8 @@ export const transferTo = atom({
     fullName: ""
   }
 })
+
+export const usersState = atom({
+  key: "users", 
+  default: []
+})

@@ -4,11 +4,16 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Dashbord from "./pages/Dashbord";
 import SendMoneyModel from "./pages/SendMoney";
+import Redirector from "./pages/Redirector";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/"
+          element={
+            <Redirector />
+          }/>
         <Route path="/signup" 
           element={
           <Signup />
