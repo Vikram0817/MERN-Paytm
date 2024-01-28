@@ -34,7 +34,7 @@ userRouter.post("/signup" ,async (req, res) => {
     if (success && !dbCheck) {
         const user = await User.create(body);
         
-        const balance = Math.round((Math.random() * 10000) * 100) / 100;
+        const balance = Math.round((Math.random() * 10000) * 100);
         await Account.create({userId: user._id, balance: balance});
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET);

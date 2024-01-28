@@ -8,6 +8,7 @@ Welcome to the Paytm App, a simple application for handling transactions and mon
 - **Send Money:** Easily send money to other users within the Paytm network.
 - **Check Balance:** View your account balance to keep track of your funds.
 - **Seach Other Users:** User can search other users hwo have an account on the App.
+- **DecimalData Managment:** Managed decimal balance in backend by using multiple of 100. 
 
 ## Technologies Used
 
@@ -38,8 +39,3 @@ Welcome to the Paytm App, a simple application for handling transactions and mon
    ```bash
    git clone https://github.com/Vikram0817/MERN-Paytm
    cd paytm-app
-
-
-**TODOs**
-  - store data in decimels in backend
-  - redirect on "/"

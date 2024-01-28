@@ -7,7 +7,7 @@ const accountRouter = Router();
 accountRouter.get("/balance", authMiddleware, async (req, res) => {
     const userId = req.userId;
     const account = await Account.findOne({userId: userId});
-    res.json({balance: account.balance});
+    res.json({balance: (account.balance / 100)});
 })
 
 accountRouter.post("/transfer", authMiddleware, async (req, res) => {
@@ -34,7 +34,7 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
         if(!toUser){
             res.status(400).json({msg: "Invalid account"})
             return;
-        }else if(fromUserAccount.balance < amount){
+        }else if(fromUserAccount.balance < (amount * 100)){
             res.status(400).json({msg: "Insufficiant balance"})
             return;
         }
@@ -46,10 +46,10 @@ accountRouter.post("/transfer", authMiddleware, async (req, res) => {
             return;
         }
 
-        fromUserAccount.balance -= amount;
+        fromUserAccount.balance -= (amount * 100);
         await fromUserAccount.save();
 
-        toUserAccount.balance += amount;
+        toUserAccount.balance += (amount * 100);
         await toUserAccount.save();
 
         await session.commitTransaction();
