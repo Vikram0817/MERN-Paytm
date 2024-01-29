@@ -56,7 +56,7 @@ export default function Signin(){
             <button onClick={handleSignin} className="border-black border-2 rounded-xl bg-black text-white mt-2 mb-2 w-1/2 m-auto hover:bg-teal-400">Sign-In</button>
             <div className="flex justify-center">
                 <p className="mr-2">Don't have an account?</p>
-                <a href="http://localhost:5173/signup" className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
+                <a href="https://mern-paytm.vercel.app/signup" className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
             </div>
         </div>
     </div>
