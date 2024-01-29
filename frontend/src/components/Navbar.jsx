@@ -7,11 +7,6 @@ export default function Navbar(){
     const [firstName, setFirstName] = useRecoilState(firstNameState);
     const [lastName, setLastName] = useRecoilState(lastNameState);
 
-    useEffect(() => {
-        setFirstName("Vikram");
-        setLastName("Chaudhary");
-    }, [])
-
     return(
         <div className="flex items-center border-2px border-black h-20 justify-between shadow-md">
             <span>
