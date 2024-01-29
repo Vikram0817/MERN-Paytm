@@ -12,7 +12,7 @@ export default function SendMoneyModel(){
     const token = localStorage.getItem("myToken");
 
     async function handleTransaction(){
-        const res = await fetch(`http://localhost:3000/api/v1/account/transfer`, {
+        const res = await fetch(`https://mern-paytm-app.vercel.app/api/v1/account/transfer`, {
             method: "POST",
             body: JSON.stringify({
                 to: transferToUser.username,

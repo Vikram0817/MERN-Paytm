@@ -12,7 +12,7 @@ export default function Signin(){
 
     async function handleSignin(){
         try {
-            const res = await fetch("http://localhost:3000/api/v1/user/signin", {
+            const res = await fetch("https://mern-paytm-app.vercel.app/api/v1/user/signin", {
                 method: "POST",
                 body: JSON.stringify({
                     username: username,
