@@ -18,7 +18,6 @@ export default function Navbar(){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             setFirstName(data.firstName);
             setLastName(data.lastName);
         })
