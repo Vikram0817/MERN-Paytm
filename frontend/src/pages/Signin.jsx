@@ -49,6 +49,10 @@ export default function Signin(){
         }
     }
     
+    function navigateToSignup(){
+        navigate("/signup");
+    }
+
     return (
         <div className="h-screen flex justify-center items-center bg-gray-200">
         <div className="rounded-2xl p-6 flex flex-col justify-center bg-white drop-shadow-xl">
@@ -65,7 +69,7 @@ export default function Signin(){
             <button onClick={handleSignin} className="border-black border-2 rounded-xl bg-black text-white mt-2 mb-2 w-1/2 m-auto hover:bg-teal-400">Sign-In</button>
             <div className="flex justify-center">
                 <p className="mr-2">Don't have an account?</p>
-                <a href="https://mern-paytm.vercel.app/signup" className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
+                <a onClick={navigateToSignup} className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
             </div>
         </div>
         {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-80">

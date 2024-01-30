@@ -49,6 +49,10 @@ export default function Signup() {
             console.log("Request Crashed!");
         }
     }
+
+    function navigateToSignin(){
+        navigate("/signin");
+    }
     
     return (
         <div className="h-screen flex justify-center items-center bg-gray-200">
@@ -72,7 +76,7 @@ export default function Signup() {
                 <button onClick={handleSignup} className="border-black border-2 rounded-xl bg-black text-white w-1/2 m-auto hover:bg-teal-400">Sign Up</button>
                 <div className="flex justify-center">
                     <p className="mr-2">Already have an account?</p>
-                    <a href="https://mern-paytm.vercel.app/signin" className="underline hover:text-teal-400 cursor-pointer">Sign-in</a>
+                    <a onClick={navigateToSignin} className="underline hover:text-teal-400 cursor-pointer">Sign-in</a>
                 </div>
             </div>
             {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-80">
