@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { usernameState, firstNameState, lastNameState, passwordState } from "../states";
+import Loader from "../components/Loader";
 
 export default function Signup() {
     
@@ -12,7 +13,10 @@ export default function Signup() {
     const [lastName, setLastName] = useRecoilState(lastNameState);
     const [password, setPassword] = useRecoilState(passwordState);
 
+    const [showLoader, setShowLoader] = useState(false);
+
     async function handleSignup() {
+        setShowLoader(true)
         try{
             const res = await fetch("https://mern-paytm-backend.vercel.app/api/v1/user/signup", {
                 method: "POST",
@@ -36,8 +40,10 @@ export default function Signup() {
             const data = await res.json();
     
             alert(data.msg);
+
             localStorage.setItem("myToken", data.token);
-            
+
+            setShowLoader(false)
             navigate("/dashbord")
         }catch(err){
             console.log("Request Crashed!");
@@ -69,6 +75,9 @@ export default function Signup() {
                     <a href="https://mern-paytm.vercel.app/signin" className="underline hover:text-teal-400 cursor-pointer">Sign-in</a>
                 </div>
             </div>
+            {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-80">
+            <Loader></Loader>
+            </div>}
         </div>
     )
 }

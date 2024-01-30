@@ -68,7 +68,7 @@ export default function Signin(){
                 <a href="https://mern-paytm.vercel.app/signup" className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
             </div>
         </div>
-        {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-50">
+        {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-80">
             <Loader></Loader>
         </div>}
         </div>
