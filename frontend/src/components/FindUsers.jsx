@@ -54,7 +54,9 @@ export default function FindUsers(){
                     <button type="button" onClick={handleSearch} className="text-white absolute end-2.5 bottom-2.5 bg-black hover:bg-teal-500 rounded-3xl text-sm px-4 py-2 dark:bg-teal-500 dark:hover:bg-teal-700 dark:focus:ring-teal-700">Search</button>
                 </div>
             </form>
-            {showLoader ? <Loader /> : users.contents.map((user, idx) => <UserCard key={idx} index={idx+1} fullName={`${user.firstName} ${user.lastName}`} id={user.userId} username={user.username}/>)}
+            {showLoader ? 
+            <div className="mt-10"><Loader /></div> : 
+            users.contents.map((user, idx) => <UserCard key={idx} index={idx+1} fullName={`${user.firstName} ${user.lastName}`} id={user.userId} username={user.username}/>)}
         </>
     )
 }
