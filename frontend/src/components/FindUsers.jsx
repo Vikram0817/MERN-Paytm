@@ -25,6 +25,7 @@ export default function FindUsers(){
         })
         if(!res.ok){
             alert(`HTTP error! status: ${res.status}`);
+            setShowLoader(false);
             return;
         }
         const data = await res.json();

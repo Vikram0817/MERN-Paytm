@@ -29,6 +29,7 @@ export default function Signup() {
     
             if(!res.ok){
                 alert("HTTP error! status: " + res.status);
+                setShowLoader(false);
                 return;
             }
     

@@ -30,6 +30,7 @@ export default function Signin(){
     
             if(!res.ok){
                 alert(`HTTP error! status ${res.status}`);
+                setShowLoader(false);
                 return
             }
             

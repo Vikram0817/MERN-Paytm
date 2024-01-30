@@ -28,6 +28,7 @@ export default function SendMoneyModel(){
         })
         if(!res.ok){
             const data = await res.json();
+            setShowLoader(false);
             alert(data.msg);
             return;
         }
