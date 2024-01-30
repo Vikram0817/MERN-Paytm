@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 export default function Signin(){
     
-    const [username, setUsername] = useRecoilState(usernameState);
+    const [username, setUsername] = useRecoilState(usernameState); //not used
     const [password, setPassword] = useRecoilState(passwordState);
     const [showLoader, setShowLoader] = useState(false);
 
