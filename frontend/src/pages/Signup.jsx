@@ -14,7 +14,7 @@ export default function Signup() {
 
     async function handleSignup() {
         try{
-            const res = await fetch("https://mern-paytm-app.vercel.app/api/v1/user/signup", {
+            const res = await fetch("https://mern-paytm-backend.vercel.app/api/v1/user/signup", {
                 method: "POST",
                 body: JSON.stringify({
                     username: username,

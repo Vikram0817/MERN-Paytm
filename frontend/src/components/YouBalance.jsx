@@ -9,7 +9,7 @@ export default function YourBalance(){
     const token = localStorage.getItem("myToken");
 
     useEffect(() => {
-        fetch("https://mern-paytm-app.vercel.app/api/v1/account/balance", {
+        fetch("https://mern-paytm-backend.vercel.app/api/v1/account/balance", {
             method: "GET",
             headers: {
             "Content-Type": "application/json",

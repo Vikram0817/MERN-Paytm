@@ -15,7 +15,7 @@ export default function SendMoneyModel(){
 
     async function handleTransaction(){
         setShowLoader(true);
-        const res = await fetch(`https://mern-paytm-app.vercel.app/api/v1/account/transfer`, {
+        const res = await fetch(`https://mern-paytm-backend.vercel.app/api/v1/account/transfer`, {
             method: "POST",
             body: JSON.stringify({
                 to: transferToUser.username,
