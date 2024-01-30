@@ -25,6 +25,27 @@ const updateSchema = zod.object({
 
 const userRouter = Router();
 
+userRouter.get("/userInfo", authMiddleware, async (req, res) => {
+    const userId = req.userId;
+
+    try {
+        const user = await User.findOne({ _id: userId });
+        
+        if (user) {
+            res.json({
+                firstName: user.firstName,
+                lastName: user.lastName
+            });
+        } else {
+            res.status(404).json({ msg: "User not found" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+});
+
+
 userRouter.post("/signup" ,async (req, res) => {
     const body = req.body;
     

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { transferTo } from "../states";
 import { useNavigate } from "react-router-dom"
+import Loader from "../components/Loader";
 
 export default function SendMoneyModel(){
 
+    const [showLoader, setShowLoader] = useState(false);
     const [amount, setAmount] = useState("");
     const transferToUser = useRecoilValue(transferTo);
     const navigate = useNavigate();
@@ -12,7 +14,8 @@ export default function SendMoneyModel(){
     const token = localStorage.getItem("myToken");
 
     async function handleTransaction(){
-        const res = await fetch(`https://mern-paytm-app.vercel.app/api/v1/account/transfer`, {
+        setShowLoader(true);
+        const res = await fetch(`http://localhost:3000/api/v1/account/transfer`, {
             method: "POST",
             body: JSON.stringify({
                 to: transferToUser.username,
@@ -29,6 +32,7 @@ export default function SendMoneyModel(){
             return;
         }
         const data = await res.json();
+        setShowLoader(false)
         alert(data.msg);
         navigate("/dashbord");
     }
@@ -48,6 +52,10 @@ export default function SendMoneyModel(){
             <input required="required" value={amount} onChange={e => setAmount(e.target.value)} className="border border-inherit mb-3 p-2" type="number" placeholder="Enter Amount" />
             <button onClick={handleTransaction} className="bg-teal-500 rounded-md drop-shadow p-2 hover:bg-teal-600">Initiate Transfer</button>
         </div>
+        {showLoader && <div className="absolute w-full h-full flex flex-col items-center justify-center bg-gray-200 opacity-75">
+            <Loader></Loader>
+            <p className="mt-2 font-medium">Processing transaction</p>
+        </div>}
         </div>
 
     )

@@ -39,3 +39,6 @@ Welcome to the Paytm App, a simple application for handling transactions and mon
    ```bash
    git clone https://github.com/Vikram0817/MERN-Paytm
    cd paytm-app
+
+## todo -
+fix user name beside hello, 

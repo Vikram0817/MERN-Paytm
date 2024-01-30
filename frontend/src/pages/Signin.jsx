@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { usernameState, passwordState } from "../states";
+import Loader from "../components/Loader";
 
 export default function Signin(){
     
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useRecoilState(passwordState);
-    
+    const [showLoader, setShowLoader] = useState(false);
+
     const navigate = useNavigate();
 
     async function handleSignin(){
+        
+        setShowLoader(true);
+
         try {
-            const res = await fetch("https://mern-paytm-app.vercel.app/api/v1/user/signin", {
+            const res = await fetch("http://localhost:3000/api/v1/user/signin", {
                 method: "POST",
                 body: JSON.stringify({
                     username: username,
@@ -29,6 +34,9 @@ export default function Signin(){
             }
             
             const data = await res.json();
+
+            setShowLoader(false);
+
             alert(data.msg);
             
             localStorage.setItem("myToken", data.token);
@@ -59,6 +67,9 @@ export default function Signin(){
                 <a href="https://mern-paytm.vercel.app/signup" className="underline hover:text-teal-400 cursor-pointer">Sign-Up</a>
             </div>
         </div>
-    </div>
+        {showLoader && <div className="absolute w-full h-full flex items-center justify-center bg-gray-200 opacity-50">
+            <Loader></Loader>
+        </div>}
+        </div>
     )
 }

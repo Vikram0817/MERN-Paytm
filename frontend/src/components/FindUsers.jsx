@@ -16,7 +16,7 @@ export default function FindUsers(){
     }, [])
 
     async function handleSearch() {
-        const res = await fetch(`https://mern-paytm-app.vercel.app/api/v1/user/?filter=${filter}`, {
+        const res = await fetch(`http://localhost:3000/api/v1/user/?filter=${filter}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,6 @@ export default function FindUsers(){
     return (
         <>
             <h3 className="text-bold text-xl m-6">Users -</h3>
-            
             <form className="w-11/12 m-auto">   
                 <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">

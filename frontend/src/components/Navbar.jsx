@@ -7,6 +7,23 @@ export default function Navbar(){
     const [firstName, setFirstName] = useRecoilState(firstNameState);
     const [lastName, setLastName] = useRecoilState(lastNameState);
 
+    const token = localStorage.getItem("myToken")
+    useEffect(() => {
+        fetch("http://localhost:3000/api/v1/user/userInfo", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setFirstName(data.firstName);
+            setLastName(data.lastName);
+        })
+    }, [])
+    
     return(
         <div className="flex items-center border-2px border-black h-20 justify-between shadow-md">
             <span>
