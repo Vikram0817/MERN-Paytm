@@ -9,7 +9,7 @@ export default function Navbar(){
 
     const token = localStorage.getItem("myToken")
     useEffect(() => {
-        fetch("https://mern-paytm.vercel.app/api/v1/user/userInfo", {
+        fetch("https://mern-paytm-app.vercel.app/api/v1/user/userInfo", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
