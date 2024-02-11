@@ -29,12 +29,13 @@ export default function FindUsers(){
             return;
         }
         const data = await res.json();
-        
-        if(data.length > 10){
-            data = data.slice(10);
-        }
 
-        setUsers(data);
+        if(data.length > 10){
+            const slicedData = data.slice(0, 10);
+            setUsers(slicedData);
+        }else{
+            setUsers(data);
+        }
         setShowLoader(false);
     }
 
