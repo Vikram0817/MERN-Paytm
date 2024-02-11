@@ -4,6 +4,22 @@ import { useRecoilStateLoadable } from "recoil";
 import { usersState } from "../states";
 import Loader from "./Loader";
 
+function useDebounce(filter, delay){
+    const [debouncedValue, setDebouncedValue] = useState(filter);
+    
+    useEffect(() => {
+        const timeOut = setTimeout(() => {
+            setDebouncedValue(filter)
+        }, delay)
+
+        return () => {
+            clearTimeout(timeOut);
+        }
+    }, [filter, delay]);
+
+    return debouncedValue;
+}
+
 export default function FindUsers(){
 
     const [filter, setFilter] = useState("");
@@ -11,9 +27,11 @@ export default function FindUsers(){
     const [showLoader, setShowLoader] = useState(true);
     const token = localStorage.getItem("myToken")
 
+    const debouncedFilter = useDebounce(filter, 200);
+
     useEffect(() => {
         handleSearch();
-    }, [])
+    }, [debouncedFilter])
 
     async function handleSearch() {
         const res = await fetch(`https://mern-paytm-backend.vercel.app/api/v1/user/?filter=${filter}`, {
@@ -52,7 +70,7 @@ export default function FindUsers(){
                     </div>
                     <input type="search" value={filter} onChange={e => setFilter(e.target.value)} id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Find Users..." required />
                     
-                    <button type="button" onClick={handleSearch} className="text-white absolute end-2.5 bottom-2.5 bg-black hover:bg-teal-500 rounded-3xl text-sm px-4 py-2 dark:bg-teal-500 dark:hover:bg-teal-700 dark:focus:ring-teal-700">Search</button>
+                    {/* <button type="button" onClick={handleSearch} className="text-white absolute end-2.5 bottom-2.5 bg-black hover:bg-teal-500 rounded-3xl text-sm px-4 py-2 dark:bg-teal-500 dark:hover:bg-teal-700 dark:focus:ring-teal-700">Search</button> */}
                 </div>
             </form>
             {showLoader ? 
